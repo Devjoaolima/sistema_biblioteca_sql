@@ -16,7 +16,6 @@ USE biblioteca_universitaria;
 -- 2. CRIAÇÃO DAS TABELAS PRINCIPAIS (sem chaves estrangeiras)
 
 -- Tabela de Alunos
--- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
 CREATE TABLE IF NOT EXISTS Aluno (
     ra VARCHAR(20) NOT NULL,
     nome VARCHAR(100) NOT NULL,
@@ -27,7 +26,6 @@ CREATE TABLE IF NOT EXISTS Aluno (
 );
 
 -- Tabela de Livros
--- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
 CREATE TABLE IF NOT EXISTS Livro (
     isbn VARCHAR(13) NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -37,7 +35,6 @@ CREATE TABLE IF NOT EXISTS Livro (
 );
 
 -- Tabela de Colaboradores
--- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
 CREATE TABLE IF NOT EXISTS Colaborador (
     cpf VARCHAR(11) NOT NULL,
     nome VARCHAR(100) NOT NULL,
@@ -52,7 +49,6 @@ CREATE TABLE IF NOT EXISTS Colaborador (
 
 -- Tabela de Empréstimos
 -- Esta tabela conecta Aluno, Livro e Colaborador
--- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
 CREATE TABLE IF NOT EXISTS Emprestimo (
     id INT NOT NULL AUTO_INCREMENT,
     dataEmprestimo DATE NOT NULL,
