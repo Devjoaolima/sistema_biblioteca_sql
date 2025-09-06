@@ -1,5 +1,6 @@
 -- =====================================================================
 -- Script para criação do Banco de Dados da Biblioteca Universitária
+-- CORRIGIDO PARA EVITAR ERROS DE TABELAS JÁ EXISTENTES
 -- =====================================================================
 
 -- 1. CRIAÇÃO DO BANCO DE DADOS
@@ -15,7 +16,8 @@ USE biblioteca_universitaria;
 -- 2. CRIAÇÃO DAS TABELAS PRINCIPAIS (sem chaves estrangeiras)
 
 -- Tabela de Alunos
-CREATE TABLE Aluno (
+-- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
+CREATE TABLE IF NOT EXISTS Aluno (
     ra VARCHAR(20) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -25,7 +27,8 @@ CREATE TABLE Aluno (
 );
 
 -- Tabela de Livros
-CREATE TABLE Livro (
+-- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
+CREATE TABLE IF NOT EXISTS Livro (
     isbn VARCHAR(13) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     autor VARCHAR(100) NOT NULL,
@@ -34,7 +37,8 @@ CREATE TABLE Livro (
 );
 
 -- Tabela de Colaboradores
-CREATE TABLE Colaborador (
+-- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
+CREATE TABLE IF NOT EXISTS Colaborador (
     cpf VARCHAR(11) NOT NULL,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -48,7 +52,8 @@ CREATE TABLE Colaborador (
 
 -- Tabela de Empréstimos
 -- Esta tabela conecta Aluno, Livro e Colaborador
-CREATE TABLE Emprestimo (
+-- Adicionado 'IF NOT EXISTS' para evitar o erro 1050
+CREATE TABLE IF NOT EXISTS Emprestimo (
     id INT NOT NULL AUTO_INCREMENT,
     dataEmprestimo DATE NOT NULL,
     dataDevolucao DATE NULL,
@@ -56,23 +61,23 @@ CREATE TABLE Emprestimo (
     livroIsbn VARCHAR(13) NOT NULL,
     colaboradorCpf VARCHAR(11) NOT NULL,
     PRIMARY KEY (id),
-    
+
     -- Definição dos índices para as chaves estrangeiras (melhora a performance)
     INDEX fk_emprestimo_aluno_idx (alunoRa ASC),
     INDEX fk_emprestimo_livro_idx (livroIsbn ASC),
     INDEX fk_emprestimo_colaborador_idx (colaboradorCpf ASC),
-    
+
     -- Definição das restrições de chave estrangeira (garante a integridade dos dados)
     CONSTRAINT fk_emprestimo_aluno
         FOREIGN KEY (alunoRa)
         REFERENCES Aluno (ra)
         ON DELETE RESTRICT ON UPDATE CASCADE,
-        
+
     CONSTRAINT fk_emprestimo_livro
         FOREIGN KEY (livroIsbn)
         REFERENCES Livro (isbn)
         ON DELETE RESTRICT ON UPDATE CASCADE,
-        
+
     CONSTRAINT fk_emprestimo_colaborador
         FOREIGN KEY (colaboradorCpf)
         REFERENCES Colaborador (cpf)
