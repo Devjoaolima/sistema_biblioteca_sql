@@ -1,6 +1,5 @@
 -- =====================================================================
 -- Script para criação do Banco de Dados da Biblioteca Universitária
--- CORRIGIDO PARA EVITAR ERROS DE TABELAS JÁ EXISTENTES
 -- =====================================================================
 
 -- 1. CRIAÇÃO DO BANCO DE DADOS
